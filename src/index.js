@@ -1,23 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-// Redux
-import { Provider } from 'react-redux';
-import { store } from './app/store';
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const apiKeyMiddleware = require('./middleware/apiKey');
+const { errorHandler, notFoundHandler } = require('./utils/errorHandler');
+const goalRoutes = require('./routes/goalRoutes');
+const taskRoutes = require('./routes/taskRoutes');
+const logger = require('./config/logger');
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
-);
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+app.use(bodyParser.json());
+app.use(cors());
+app.use(apiKeyMiddleware);
+
+console.log('Setting up routes...');
+app.use('/api/goals', goalRoutes);
+app.use('/api/tasks', taskRoutes);
+console.log('Routes set up.');
+
+app.use(notFoundHandler);
+app.use(errorHandler);
+
+app.listen(PORT, () => {
+  logger.info(`Servidor corriendo en el puerto ${PORT}`);
+});
