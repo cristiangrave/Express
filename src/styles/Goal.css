@@ -1,0 +1,39 @@
+.goal-card {
+    margin: 2rem;
+    background-color: #B9DDBE!important;
+    border-radius: 25px!important;
+    color: #333;
+    
+    font-family: "Arial", sans-serif;
+}
+
+.goal-card.card-body {
+    position: relative;
+    padding: 20px;
+}
+
+.goal-card.card-title {
+    font-size: 1.25rem;
+    color: #000;
+    margin-bottom: 0.5rem;
+}
+
+.goal-card.card-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #000;
+}
+
+.goal-card.btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border: none;
+    color: #fff;
+    background-color: #ff6464;
+    transition: background-color 0.3s;
+}
+
+.goal-card.btn:hover {
+    background-color: #ff3c3c;
+}
