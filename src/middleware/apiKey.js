@@ -1,4 +1,4 @@
-const API_KEY = 'chanchitoFeliz';
+const API_KEY = 'pato';
 
 const apiKey = (req, res, next) => {
     const apiKey = req.header('Authorization');
