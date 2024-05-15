@@ -15,8 +15,8 @@ app.use(cors());
 app.use(apiKeyMiddleware);
 
 console.log('Setting up routes...');
-app.use('/api/goals', goalRoutes);
-app.use('/api/tasks', taskRoutes);
+app.use('/goals', goalRoutes);
+app.use('/tasks', taskRoutes);
 console.log('Routes set up.');
 
 app.use(notFoundHandler);
