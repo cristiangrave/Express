@@ -5,19 +5,22 @@ const getGoals = (req, res) => {
 };
 
 const addGoal = (req, res) => {
+  let idgoal = Date.now() + Math.random();
+  idgoal = Math.floor(idgoal);
     try {
-        const { goal, deadline } = req.body;
-        goalService.addGoal(goal, deadline);
-        res.status(200).json({ message: 'Meta agregada' });
+      const { goal, deadline } = req.body;
+      /* aqui solo mandamos las variables del request el id goal se asigna cuando se llama el metodo addgoal */
+        goalService.addGoal(idgoal,goal,deadline);
+        res.status(200).json({ message:'Meta agregada'});
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({error:error.message });
     }
 };
 
 const removeGoal = (req, res) => {
     try {
-        const { goal } = req.body;
-        goalService.removeGoal(goal);
+        const { id } = req.body;
+        goalService.removeGoal(id);
         res.status(200).json({ message: 'Meta eliminada' });
     } catch (error) {
         res.status(400).json({ error: error.message });
